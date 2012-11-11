@@ -1,0 +1,100 @@
+Descripton of all the programs... if you add programs please edit this file for basic description and usage
+to be used later for writing an in game help function for our added programs.
+
+**template**
+
+==============================================================================================================
+Program Name: 
+Author: 
+Puropse: 
+Use: 
+Notes: 
+==============================================================================================================
+
+==============================================================================================================
+Program Name: bridge
+Author: abs0lutek0ld
+Purpose: construct an enclosed bridge for mining lava in neither
+Use: bridge
+Notes: this creates a 4 wide tunnel initial placement and final state are same
+/start & finish positioning/
+[*][*][*][*][*][*]			[*]=wall
+[*]      (T)   [*]			(T)=turtle
+[*] C  P {M} C [*]			 C=chest
+[*]            [*]			 M&P=miner and pump respectively
+
+the turtle finishes in the same respective position when it finished the extension ready for you to lay down
+the lava harverster rig
+==============================================================================================================
+
+==============================================================================================================
+Program Name: dmfd
+Author: abs0lutek0ld
+Puropse: Minimalist tunnel digging program
+Use: dmfd [number]
+		[number] is the length of the tunnel
+Notes: this makes a 2x1 tunnel for the going of places at a high rate of speed.
+==============================================================================================================
+
+==============================================================================================================
+Program Name: putFloor
+Author: abs0lutek0ld
+Puropse: to lay a new floor
+Use: putFloor go
+Notes: to be used in conjunction with rmFloor.  only for square or rectangle enclosed rooms with no furnature
+	original use to make large underground treefarms or animal pens but can be used to refloor any enclosed 
+	room. Also can be used to fill in water areas if sand or gravel is used in turtle inventory
+==============================================================================================================
+
+==============================================================================================================
+Program Name: rmC
+Author: abs0lutek0ld
+Puropse: the tunnel command without placing the block under the miner so we can make ceilings higher
+Use: rmC [number]
+	[number] the length of the tunnel
+Notes: all i did was comment out the turtle.placeDown() in the loop everything else is the same..will consider
+	updating to tunret later.
+==============================================================================================================
+==============================================================================================================
+Program Name: rmCr
+Author: abs0lutek0ld
+Puropse: same as rmC with return enabled
+Use: rmCr [number]  
+	[number] the length of the tunnel
+Notes: all i did was comment out the turtle.placeDown() in the loop everything else is the same..will consider
+	updating to tunret later.
+==============================================================================================================
+
+==============================================================================================================
+Program Name: rmFloor
+Author: abs0lutek0ld
+Puropse: to rip out the floor in an empty walled room
+Use: rmFloor go
+Notes: Currently only for completely square or rectangle rooms with walls rooms like underground farms 
+	to be used in conjunction with putFloor.
+==============================================================================================================
+
+==============================================================================================================
+Program Name: treefarm
+Author: web
+Puropse: automated treefarm
+Use: treefarm
+Notes: it's a 3x4 farm
+==============================================================================================================
+
+==============================================================================================================
+Program Name: tunneldig **unstable**
+Author: hicksjr1
+Puropse: User specified tunnel digger
+Use: tunneldig
+Notes: all tunnel dimensions are user input to the program 
+==============================================================================================================
+
+==============================================================================================================
+Program Name: tunret
+Author: yourclone
+Puropse: the tunnel program with turtle return to start implimented
+Use: tunret [number]
+	[number] is the length of the 2 high by 3 wide tunnel
+Notes: the turtle will return to starting location
+==============================================================================================================

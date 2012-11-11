@@ -1,0 +1,83 @@
+-- putFloor
+-- program to place a floor in a room
+-- warning 
+-- Init variables
+xPos=0
+-- Local functions
+local tArgs = { ... }
+if #tArgs ~= 1 then
+	print( "Usage: putFloor go" )
+	print( "Be sure only to use on enclosed room else strange shit can happen" )
+	return
+end
+--primary dig command
+local function putTo()
+	while turtle.detectDown() ~= true do
+		turtle.placeDown()
+	end
+end
+	
+local function to()	
+	if turtle.detect() ~=true then
+	turtle.forward()
+	xPos=xPos + 1
+	end
+end
+
+local function putFrom()
+	while turtle.detectDown() ~= true do
+		turtle.placeDown()
+	end
+end
+local function from()
+	if turtle.detect() ~= true then
+		turtle.forward()
+		xPos=xPos - 1
+	end
+end
+	-- turn around command
+local function turn()
+	if xPos == 0 then
+		while turtle.detectDown() ~= true do
+			turtle.placeDown()
+		end
+		turtle.turnLeft()
+		if turtle.detect() == true then
+			tArgs[1] = "stop"
+			os.reboot()
+		else
+		turtle.forward()
+		turtle.turnLeft()
+		end
+	else
+		while turtle.detectDown() ~= true do
+			turtle.placeDown()
+		end
+		turtle.turnRight()
+		if turtle.detect() == true then
+			tArgs[1] = "stop"
+			os.reboot()
+		else
+		turtle.forward()
+		turtle.turnRight()
+		end
+	end
+end	
+
+--Main Call
+function main()
+	while tArgs[1] == "go" do
+		while turtle.detect() ~= true do
+			putTo()
+			to()
+		end
+		turn()
+		while turtle.detect() ~=true do
+			putFrom()
+			from()
+		end
+		turn()
+	end
+end
+
+main()

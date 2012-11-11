@@ -1,0 +1,65 @@
+-- rmFloor
+-- program to rip up a floor in a room
+-- warning 
+-- Init variables
+xPos=0
+-- Local functions
+local tArgs = { ... }
+if #tArgs ~= 1 then
+	print( "Usage: rmFloor go" )
+	print( "Be sure only to use on enclosed room else strange shit can happen" )
+	return
+end
+--primary dig command
+local function ripperTo()
+	while turtle.detect() ~= true do
+		turtle.digDown()
+		turtle.forward()
+		xPos=xPos + 1
+	end
+end
+local function ripperFrom()
+	while turtle.detect() ~= true do
+		turtle.digDown()
+		turtle.forward()
+		xPos=xPos - 1
+	end
+end
+	-- turn around command
+local function turn()
+	if xPos == 0 then
+		turtle.digDown()
+		turtle.turnLeft()
+		if turtle.detect() == true then
+			turtle.up()
+			tArgs[1] = "stop"
+			os.reboot()
+		else
+		turtle.forward()
+		turtle.turnLeft()
+		end
+	else
+		turtle.digDown()
+		turtle.turnRight()
+		if turtle.detect() == true then
+			turtle.up()
+			tArgs[1] = "stop"
+			os.reboot()
+		else
+		turtle.forward()
+		turtle.turnRight()
+		end
+	end
+end	
+
+--Main Call
+function main()
+	while tArgs[1] == "go" do
+		ripperTo()
+		turn()
+		ripperFrom()
+		turn()
+	end
+end
+
+main()

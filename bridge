@@ -1,0 +1,89 @@
+
+-- Nether Lava harvesting bridge
+
+
+-- Build the ring passageway and return to Start
+local function ring()
+	turtle.placeDown()
+	for a=1,4 do
+		turtle.forward()
+		turtle.placeDown()
+	end
+	for b=1,4 do
+		turtle.up()
+		turtle.placeDown()
+	end
+	turtle.turnLeft()
+	turtle.turnLeft()
+	for c=1,4 do
+		turtle.forward()
+		turtle.placeDown()
+	end
+	turtle.forward()
+	turtle.down()
+	for d=1,5 do
+		turtle.down()
+		turtle.placeUp()
+	end
+	turtle.turnRight()
+	turtle.forward()
+	turtle.up()
+	turtle.turnRight()
+	turtle.forward()
+	turtle.up()
+end
+
+--Get from behind miner to new start
+local function tostart()
+	turtle.dig()
+	turtle.forward()
+	turtle.forward()
+	turtle.turnLeft()
+	turtle.forward()
+	turtle.forward()
+	turtle.turnRight()
+	turtle.turnRight()
+end
+
+--Build a wall on the end
+local function wall()
+	for e=1,2 do
+		for f=1,5 do
+			turtle.placeDown()
+			turtle.up()
+		end
+		turtle.forward()
+		turtle.down()
+		for f=1,6 do
+			turtle.down()
+			turtle.placeUp()
+		end
+		turtle.forward()
+		turtle.up()
+		turtle.up()
+		end
+end
+-- find a way back in
+local function home()
+	turtle.turnRight()
+	turtle.dig()
+	turtle.forward()
+	turtle.turnRight()
+	turtle.forward()
+	turtle.turnRight()
+	turtle.turnRight()
+	turtle.place()
+	turtle.turnRight()
+	turtle.turnRight()
+	turtle.forward()
+	turtle.turnRight()
+end
+	
+
+--- Main Tree
+tostart()
+for z=1,8 do
+	ring()
+end
+wall()
+home()

@@ -1,0 +1,44 @@
+-- Dig mother fucker Dig!!
+-- Program for mining a minimalist tunnel with floor creation
+
+local tArgs = { ... }
+if #tArgs ~= 1 then
+	print( "Usage: dmfd <length>" )
+	return
+end
+
+-- Mine in a quarry pattern until we hit something we can't dig
+local length = tonumber( tArgs[1] )
+if length < 1 then
+	print( "Tunnel length must be positive" )
+	return
+end
+
+-- check and place
+local function walkway()
+	if turtle.detectDown() ~= true then
+	turtle.placeDown()
+	end
+end
+local function digger()
+	if turtle.detect() == true then	turtle.dig()
+	end
+	if turtle.detectUp() == true then turtle.digUp()
+	end
+end
+
+local function walk()
+	if (turtle.detect() ~= true) and (turtle.detectUp() ~= true) then
+	turtle.forward()
+	end
+end
+
+function main()
+	for l=1,length do
+		digger()
+		walk()
+		walkway()
+	end
+end
+
+main()

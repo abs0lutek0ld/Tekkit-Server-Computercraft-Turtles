@@ -1,0 +1,237 @@
+
+-- 3x3 tunneler
+
+--Jimmy's First program
+
+------------------------------------------------------
+--INITIALIZE VARIABLES
+------------------------------------------------------
+X = 0
+Y = 0
+Z = 0
+C = 0 --Torch distance counter
+i = 0 --Loop counter
+zzz = 0.4 --Sleep time between digsj
+Full = 0 --Full toggle
+------------------------------------------------------
+--GLOBAL FUNCTIONS
+------------------------------------------------------
+
+--Move the turtle forward (Plus Y)
+function forward()
+	dig()
+	turtle.forward()
+	Y = Y + 1
+	C = C + 1
+	-- Place Torch
+	if C == 5 then
+		if Z == 1 then
+			turtle.select(1) -- Select torches
+			place.down()
+			C = 0
+		end
+	end
+end
+
+--Move the turtle backward (Minus Y)
+function backward()
+	turtle.back()
+	Y = Y - 1
+end
+
+--Move the turtle up (Plus Z)
+function up()
+	digup()
+	turtle.up()
+	Z = Z + 1
+end
+
+--Move the turtle down (Minus Z)
+function down()
+	digdown()
+	turtle.down()
+	Z = Z - 1
+end
+
+--Slew the turtle left (Minus X)
+function left()
+	turtle.turnLeft()
+	dig()
+	turtle.forward()
+	turtle.turnRight()
+	X = X - 1
+end
+
+--Slew the turtle right (Plus X)
+function right()
+	turtle.turnRight()
+	dig()
+	turtle.forward()
+	turtle.turnLeft()
+	X = X + 1
+end
+
+--DIG!
+function dig()
+	while turtle.detect() == true do
+		turtle.dig()
+		delay()
+		if turtle.getItemCount(9) > 0 then
+			Full = 1
+			gohome()
+		end
+	end
+end
+
+--DIG UP!
+function digup()
+	while turtle.detectUp() == true do
+		turtle.digUp()
+		delay()
+		if turtle.getItemCount(9) > 0 then
+			Full = 1
+			gohome()
+		end
+	end
+end
+
+--DIG DOWN!
+function digdown()
+	while turtle.detectDown() == true do
+		turtle.digDown()
+		delay()
+		if turtle.getItemCount(9) > 0 then
+			Full = 1
+			gohome()
+		end
+	end
+end
+
+--Delay. Set the delay here
+function delay()
+	sleep(zzz)
+end
+
+--Dig row left to right
+function rowplus()
+	while X < (width-1) do
+		right()
+	end
+end
+
+--Dig row right to left
+function rowminus()
+	while X > 0 do
+		left()
+	end
+end
+
+--Return the turtle to the starting location
+function gohome()
+	while X > 0 do
+		left()
+	end
+	
+	while Y > 0 do
+		backward()
+	end
+	
+	while Z > 0 do
+		down()
+	end
+end
+
+--Prompt User for length of tunnel
+function Start()
+	width = 0
+	height = 0
+	length = 0
+	answer = 0
+		while answer == 0 do
+			shell.run("clear")
+			io.write "Enter tunnel width:"
+			width = io.read()
+			width = tonumber(width)
+			io.write "Enter tunnel height:"
+			height = io.read()
+			height = tonumber(height)
+			io.write "Enter tunnel length:"
+			length = io.read()
+			length = tonumber(length)
+			shell.run("clear")
+			io.write "Please confirm width:"
+			io.write (width)
+			io.write "\nPlease confirm height:"
+			io.write (height)
+			io.write "\nPlease confirm length:"
+			io.write (length)
+			io.write "\n1-correct 0-incorrect\n"
+			answer = io.read()
+		end
+end
+
+------------------------------------------------------
+--Actual Program
+------------------------------------------------------
+Start()
+
+forward()
+
+loop1 = 1
+loop2 = 0
+
+while Y < length do
+
+	if Z == 0 then
+	if loop1 == 1 then
+		while Z <= (height-1) do
+			if X == 0 then
+				rowplus()
+			elseif X == (width-1) then
+				rowminus()
+			end
+		if Z < (height-1) then
+			up()
+		end
+		end
+			if Full == 1 then
+				break
+			end
+		end
+	end
+	
+	
+	if Z == (height-1) then
+	if loop2 == 1 then
+		while Z >= 0 do
+			if X == 0 then
+				rowplus()
+			elseif X == (width-1) then
+				rowminus()
+			end
+		if Z > 0 then
+			down()
+		end
+			if Full == 1 then
+				break
+			end
+		end
+	end
+	end
+	
+	if Z == (height-1) then
+		loop1 = 1
+		loop2 = 1
+	end
+	
+	if Z == 0 then
+		loop1 = 1
+		loop2 = 0
+	end
+	
+	forward()	
+	
+end
+
+gohome()
+	
